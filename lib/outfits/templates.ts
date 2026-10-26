@@ -12,5 +12,12 @@ const pieces:Record<Element,Record<Scene,[string,string,string,string]>>={
 };
 
 export function getOutfits(element:Element,style:OutfitStyle):Outfit[]{
-  return (Object.entries(pieces[element]) as [Scene,[string,string,string,string]][]).map(([scene,p])=>({scene,top:p[0],bottom:p[1],shoes:p[2],accessory:p[3],note:`${styleLabel[style]}的配法，用已有单品或小面积配饰带入推荐色即可。`}));
+  return (Object.entries(pieces[element]) as [Scene,[string,string,string,string]][]).map(([scene,p])=>{
+    const styled=style==="feminine"
+      ? [`${p[0]}，可选柔软领型`,`${p[1]}或同色中长裙`,`${p[2]}或简洁浅口鞋`,`${p[3]}，也可换成丝巾`]
+      : style==="masculine"
+        ? [`${p[0]}，优先挺括版型`,`${p[1]}，选直线剪裁`,`${p[2]}或简洁系带鞋`,`${p[3]}，也可换成皮带或表带`]
+        : [`${p[0]}，保持宽松简洁`,`${p[1]}，选利落直筒版`,p[2],`${p[3]}，小面积点缀即可`];
+    return {scene,top:styled[0],bottom:styled[1],shoes:styled[2],accessory:styled[3],note:`${styleLabel[style]}的配法，优先使用衣橱里已有的近似单品，不必追求全身同色。`};
+  });
 }

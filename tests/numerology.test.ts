@@ -12,7 +12,7 @@ describe("映射与配色",()=>{
 });
 describe("内容引擎",()=>{
  const a=analyzeDay(birthday,date);
- it("为每种风格返回三个真实场景",()=>{for(const s of ["feminine","masculine","neutral"] as const){const o=getOutfits("木",s);expect(o).toHaveLength(3);expect(o.map(x=>x.scene)).toEqual(["日常休闲","上班通勤","聚会外出"]);expect(o.every(x=>x.top&&x.bottom&&x.shoes&&x.accessory)).toBe(true)}});
+ it("为每种风格返回三个不重复的真实场景",()=>{const signatures=new Set<string>();for(const element of ["金","水","火","木","土"] as const){for(const s of ["feminine","masculine","neutral"] as const){const o=getOutfits(element,s);expect(o).toHaveLength(3);expect(o.map(x=>x.scene)).toEqual(["日常休闲","上班通勤","聚会外出"]);expect(o.every(x=>x.top&&x.bottom&&x.shoes&&x.accessory)).toBe(true);o.forEach(x=>signatures.add(`${element}-${x.scene}-${x.top}-${x.bottom}`))}}expect(signatures.size).toBe(45)});
  it("综合解读体现长期播种与当日整理",()=>{const r=interpret(a);expect(r.annual).toContain("全年");expect(r.annual).toContain("打基础");expect(r.monthly).toContain("本月");expect(r.today).toContain("完成已有待办");expect(r.relation).toContain("并不冲突")});
  it("每日提醒稳定",()=>expect(stableReminder(a)).toBe(stableReminder(analyzeDay(birthday,date))));
 });
