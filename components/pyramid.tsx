@@ -1,0 +1,2 @@
+import type { Pyramid as PyramidType } from "@/lib/numerology/types";
+export function Pyramid({title,data}: {title:string;data:PyramidType}){return <details className="pyramid-card"><summary><span>{title}</span><strong>{data.result}</strong><small>展开计算</small></summary><div className="pyramid" aria-label={`${title}倒金字塔计算`}><div>{data.first.map((n,i)=><b key={i}>{n}</b>)}</div><div>{data.second.map((n,i)=><b key={i}>{n}</b>)}</div><div><b className="final">{data.result}</b></div></div><p>第一层 → 第二层 → 最终数字，逐层相加并化简至 1–9。</p></details>}

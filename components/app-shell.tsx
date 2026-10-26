@@ -1,0 +1,4 @@
+"use client";
+import Link from "next/link";import { usePathname } from "next/navigation";import { CalendarDays,Home,LibraryBig,UserRound,Leaf } from "lucide-react";
+const items=[{href:"/",label:"首页",Icon:Home},{href:"/calendar",label:"月历",Icon:CalendarDays},{href:"/knowledge",label:"数易知识",Icon:LibraryBig},{href:"/profile",label:"我的",Icon:UserRound}];
+export function AppShell({children}:{children:React.ReactNode}){const path=usePathname();return <div className="app-frame"><header className="topbar"><Link href="/" className="brand"><span className="brand-mark"><Leaf size={18}/></span><span>每日数易指南<small>DAILY RHYTHM</small></span></Link><p>以传统象征，看见今天的节奏</p></header><main className="page-shell">{children}</main><nav className="bottom-nav" aria-label="主要导航">{items.map(({href,label,Icon})=><Link key={href} href={href} className={path===href||href!=="/"&&path.startsWith(href)?"active":""}><Icon size={20}/><span>{label}</span></Link>)}</nav></div>}
