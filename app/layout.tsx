@@ -1,4 +1,4 @@
-import type { Metadata,Viewport } from "next";import "./globals.css";import { AppProvider } from "@/components/app-provider";import { AppShell } from "@/components/app-shell";import { PwaRegister } from "@/components/pwa-register";
+import type { Metadata,Viewport } from "next";import "./globals.css";import { AppProvider } from "@/components/app-provider";import { AppShell } from "@/components/app-shell";import { PwaRegister } from "@/components/pwa-register";import { LanguageProvider } from "@/components/language-provider";
 export const metadata:Metadata={title:{default:"每日数易指南",template:"%s｜每日数易指南"},description:"三层倒金字塔数易算法、每日行动节奏、五行穿搭配色与月历指南。",manifest:"/manifest.webmanifest",appleWebApp:{capable:true,statusBarStyle:"default",title:"数易指南"},icons:{icon:"/favicon.svg",apple:"/icon-192.svg"}};
 export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#174B3C"};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="zh-CN" suppressHydrationWarning><body><AppProvider><AppShell>{children}</AppShell><PwaRegister/></AppProvider></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="zh-CN" suppressHydrationWarning><body><LanguageProvider><AppProvider><AppShell>{children}</AppShell><PwaRegister/></AppProvider></LanguageProvider></body></html>}
